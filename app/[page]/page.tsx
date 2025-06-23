@@ -10,7 +10,12 @@ export async function generateMetadata(props: {
   const params = await props.params;
   const page = await getPage(params.page);
 
-  if (!page) return notFound();
+  if (!page) {
+    return {
+      title: 'Страница не найдена',
+      description: 'Такой страницы нет.',
+    };
+  }
 
   return {
     title: page.seo?.title || page.title,
